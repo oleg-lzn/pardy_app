@@ -1,14 +1,11 @@
-import 'server-only'
-import { db } from '@/db/db'
-import { and, asc, count, desc, eq, ne, not } from 'drizzle-orm'
-import { events, rsvps } from '@/db/schema'
-import { delay } from './delay'
-import { memoize } from 'nextjs-better-unstable-cache'
+import 'server-only';
+import { db } from '@/db/db';
+import { and, asc, eq } from 'drizzle-orm';
+import { events, rsvps } from '@/db/schema';
+import { memoize } from 'nextjs-better-unstable-cache';
 
 export const getEventsForDashboard = memoize(
   async (userId: string) => {
-    await delay()
-
     const data = await db.query.events.findMany({
       where: eq(events.createdById, userId),
       columns: {
@@ -22,9 +19,9 @@ export const getEventsForDashboard = memoize(
       },
       limit: 5,
       orderBy: [asc(events.startOn)],
-    })
+    });
 
-    return data ?? []
+    return data ?? [];
   },
   {
     persist: true,
@@ -33,15 +30,14 @@ export const getEventsForDashboard = memoize(
     log: ['datacache', 'verbose'],
     logid: 'dashboard:events',
   }
-)
+);
 
 export const getAllEvents = memoize(
   async (userId: string) => {
-    await delay()
     return db.query.events.findMany({
       where: eq(events.createdById, userId),
       orderBy: [asc(events.startOn)],
-    })
+    });
   },
   {
     persist: true,
@@ -49,14 +45,13 @@ export const getAllEvents = memoize(
     suppressWarnings: true,
     logid: 'events',
   }
-)
+);
 
 export const getOneEvent = memoize(
   async (userId: string, eventId: string) => {
-    await delay()
     return db.query.events.findFirst({
       where: and(eq(events.createdById, userId), eq(events.id, eventId)),
-    })
+    });
   },
   {
     persist: true,
@@ -64,4 +59,4 @@ export const getOneEvent = memoize(
     suppressWarnings: true,
     logid: 'event',
   }
-)
+);

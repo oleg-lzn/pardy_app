@@ -7,7 +7,6 @@ import { delay } from './delay';
 
 export const getAttendeesCountForDashboard = memoize(
   async (userId: string) => {
-    await delay();
     const counts = await db
       .select({
         totalAttendees: sql`count(distinct ${attendees.id})`,
@@ -33,7 +32,6 @@ export const getAttendeesCountForDashboard = memoize(
 
 export const getGuestList = memoize(
   async (userId: string) => {
-    await delay();
     const uniqueAttendees = await db
       .selectDistinct({
         id: attendees.id,

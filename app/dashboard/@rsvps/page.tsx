@@ -17,7 +17,7 @@ const RsvpsSlot = async () => {
 
   return (
     <div className="w-full h-full p-4 flex flex-col">
-      <h2 className="text-center text-xl mb-4 flex-shrink-0">{`RSVPs`}</h2>
+      <h2 className="text-center text-xl mb-4 flex-shrink-0 font-bold">{`RSVPs`}</h2>
       <div className="flex-1 overflow-hidden">
         <div className="h-full rounded-md border border-default-100 overflow-y-auto">
           {data.length === 0 ? (

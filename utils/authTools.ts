@@ -115,7 +115,7 @@ export async function createSession(userToken: string) {
   }
 }
 
-async function getUserbyEmail(email) {
+async function getUserbyEmail(email: string) {
   try {
     const existingUser = await db.query.users.findFirst({
       where: eq(users.email, email),
