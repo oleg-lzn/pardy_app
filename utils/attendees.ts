@@ -3,7 +3,6 @@ import { db } from '@/db/db';
 import { attendees, events, rsvps } from '@/db/schema';
 import { memoize } from 'nextjs-better-unstable-cache';
 import { eq, sql } from 'drizzle-orm';
-import { delay } from './delay';
 
 export const getAttendeesCountForDashboard = memoize(
   async (userId: string) => {
@@ -44,7 +43,9 @@ export const getGuestList = memoize(
       .where(eq(events.createdById, userId))
       .execute();
 
-    return uniqueAttendees;
+    return uniqueAttendees.filter(
+      (guest) => guest.id !== undefined && guest.id !== null
+    );
   },
   {
     persist: true,
