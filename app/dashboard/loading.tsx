@@ -1,5 +1,7 @@
+import { Loader } from '@/components/Loader';
+
 const HomeLoader = () => {
-  return 'loadin...';
+  return <Loader />;
 };
 
 export default HomeLoader;

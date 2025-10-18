@@ -1,5 +1,7 @@
+import { Loader } from '@/components/Loader';
+
 const RsvpsLoader = () => {
-  return 'loading...';
+  return <Loader />;
 };
 
 export default RsvpsLoader;

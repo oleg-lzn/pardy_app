@@ -1,5 +1,7 @@
+import { Loader } from '@/components/Loader';
+
 const EventsLoader = () => {
-  return 'loading...';
+  return <Loader />;
 };
 
 export default EventsLoader;
