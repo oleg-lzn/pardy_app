@@ -1,6 +1,15 @@
-'use client'
-const HomeError = () => {
-  return <div>error</div>
-}
+'use client';
 
-export default HomeError
+import ErrorComponent from '@/components/error';
+
+const DashboardError = ({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) => {
+  return <ErrorComponent errorName="dashboard" error={error} reset={reset} />;
+};
+
+export default DashboardError;

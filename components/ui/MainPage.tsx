@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
+import Image from 'next/image';
+import PardyLogo from '@/images/pardy.png';
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -29,10 +31,11 @@ function Hero() {
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-background">
       <div className="container mx-auto px-4">
-        <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
+        <div className="flex gap-10 py-20 lg:py-40 items-center justify-center flex-col">
+          <Image src={PardyLogo} alt="Pardy Logo" width={300} height={300} />
           <div className="flex gap-4 flex-col items-center">
             <h1 className="text-5xl md:text-7xl max-w-4xl tracking-tighter text-center font-regular text-foreground">
-              <span className="text-primary">Managing events is</span>
+              <span className="text-primary">makes events</span>
               <span className="relative inline-block h-[1.2em] w-full text-center md:pb-4 md:pt-1">
                 {titles.map((title, index) => (
                   <motion.span

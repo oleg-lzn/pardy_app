@@ -1,6 +1,7 @@
-'use client'
-const RsvpsError = () => {
-  return <div>error</div>
-}
+'use client';
+import ErrorComponent from '@/components/error';
 
-export default RsvpsError
+const RsvpsError = ({ error, reset }: { error: Error; reset: () => void }) => {
+  return <ErrorComponent errorName="rsvps" error={error} reset={reset} />;
+};
+export default RsvpsError;

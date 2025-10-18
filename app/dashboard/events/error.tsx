@@ -1,4 +1,5 @@
 'use client';
+
 import ErrorComponent from '@/components/error';
 
 const EventsError = ({ error, reset }: { error: Error; reset: () => void }) => {
