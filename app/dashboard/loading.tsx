@@ -1,5 +1,5 @@
 const HomeLoader = () => {
-  return '...loading'
-}
+  return 'loadin...';
+};
 
-export default HomeLoader
+export default HomeLoader;

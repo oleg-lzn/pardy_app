@@ -1,5 +1,5 @@
 const RsvpsLoader = () => {
-  return '...loading'
-}
+  return 'loading...';
+};
 
-export default RsvpsLoader
+export default RsvpsLoader;

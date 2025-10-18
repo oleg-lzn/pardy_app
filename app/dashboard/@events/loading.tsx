@@ -1,5 +1,5 @@
 const EventsLoader = () => {
-  return '...loading'
-}
+  return 'loading...';
+};
 
-export default EventsLoader
+export default EventsLoader;

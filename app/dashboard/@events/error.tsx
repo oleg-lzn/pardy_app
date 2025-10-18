@@ -1,6 +1,6 @@
-'use client'
+'use client';
 const EventsError = () => {
-  return <div>error</div>
-}
+  return <div>Error</div>;
+};
 
-export default EventsError
+export default EventsError;

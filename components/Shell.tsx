@@ -1,7 +1,7 @@
-import Side from './Side'
-import Nav from './Nav'
+import Side from './Side';
+import Nav from './Nav';
 
-const Shell = ({ children }) => {
+const Shell = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex w-screen h-screen">
       <aside className="w-[200px] min-w-[200px] max-w-[200px] h-full border-r border-default-50">
@@ -12,7 +12,7 @@ const Shell = ({ children }) => {
         <main className="h-[calc(100vh-65px)]">{children}</main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Shell
+export default Shell;
