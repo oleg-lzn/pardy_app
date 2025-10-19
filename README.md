@@ -1,6 +1,6 @@
-# 🎉 Pardy App
+# 🎉 Event Manager
 
-A modern event management application built with Next.js 14, featuring user authentication, event creation, RSVP management, and real-time updates.
+A modern event management application built with Next.js 14, featuring user authentication, event creation, RSVP management, and guest tracking.
 
 ## 🚀 Live Demo
 
@@ -9,36 +9,61 @@ A modern event management application built with Next.js 14, featuring user auth
 ## ✨ Features
 
 - **User Authentication**: Secure sign-up and sign-in with JWT tokens
-- **Event Management**: Create, edit, and manage events with detailed information
+- **Event Management**: Create, edit, and manage events with detailed information including location and privacy settings
 - **RSVP System**: Attendees can RSVP with status options (going, not-going, maybe)
-- **Dashboard**: Comprehensive dashboard with event overview and activity tracking
-- **Guest Management**: Track and manage event attendees
-- **Responsive Design**: Modern UI built with NextUI and Tailwind CSS
-- **Real-time Updates**: Live data synchronization across the application
+- **Dashboard**: Comprehensive dashboard with attendee count overview and activity tracking
+- **Guest Management**: Track and manage event attendees with detailed guest information
+- **Event Status Tracking**: Events can have different statuses (draft, live, started, ended, canceled)
+- **Responsive Design**: Modern UI built with NextUI and Tailwind CSS with dark mode support
+- **Parallel Routes**: Advanced routing with parallel routes for events and RSVPs
+- **Server Actions**: Modern Next.js server actions for form handling and data mutations
 
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 14 with App Router
-- **Database**: SQLite with Drizzle ORM
+- **Database**: Turso (LibSQL) with Drizzle ORM
 - **Authentication**: JWT with bcrypt for password hashing
 - **UI Components**: NextUI (React component library)
 - **Styling**: Tailwind CSS
 - **Type Safety**: TypeScript
 - **Icons**: Lucide React
 - **Animations**: Framer Motion
+- **Validation**: Zod for schema validation
 
 ## 📁 Project Structure
 
 ```
 pardy_app_next_js/
-├── actions/                 # Server actions for auth and events
+├── actions/                 # Server actions for auth, events, guests, and signout
 ├── app/                    # Next.js app directory
-│   ├── (auth)/            # Authentication pages
-│   └── dashboard/         # Main application dashboard
+│   ├── (auth)/            # Authentication pages (signin, signup)
+│   ├── dashboard/         # Main application dashboard
+│   │   ├── @events/       # Events parallel route
+│   │   ├── @rsvps/        # RSVPs parallel route
+│   │   ├── events/        # Event management pages
+│   │   ├── guests/        # Guest management pages
+│   │   ├── activity/      # Activity tracking
+│   │   └── settings/      # User settings
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
 ├── components/            # Reusable React components
-│   └── ui/               # UI components
+│   ├── ui/               # UI components
+│   ├── EventCard.tsx     # Event display component
+│   ├── GuestForm.tsx     # Guest form component
+│   ├── Nav.tsx           # Navigation component
+│   ├── Shell.tsx         # Layout shell
+│   └── Side.tsx          # Sidebar component
 ├── db/                   # Database configuration and schema
+│   ├── db.ts            # Database connection
+│   └── schema.ts        # Database schema definitions
 ├── utils/                # Utility functions
+│   ├── attendees.ts     # Attendee utilities
+│   ├── authTools.ts     # Authentication utilities
+│   ├── events.ts        # Event utilities
+│   ├── rsvps.ts         # RSVP utilities
+│   └── users.ts         # User utilities
+├── migrations/           # Database migrations
 ├── public/               # Static assets
 └── images/              # Application images
 ```
@@ -69,7 +94,8 @@ pardy_app_next_js/
    Create a `.env.local` file in the root directory:
 
    ```env
-   DATABASE_URL="your-database-url"
+   TURSO_CONNECTION_URL="your-turso-connection-url"
+   TURSO_AUTH_TOKEN="your-turso-auth-token"
    JWT_SECRET="your-jwt-secret"
    ```
 
@@ -95,18 +121,18 @@ pardy_app_next_js/
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
-- `npm run db:push` - Push database schema changes
-- `npm run db:studio` - Open Drizzle Studio
+- `npm run db:push` - Push database schema changes to Turso
+- `npm run db:studio` - Open Drizzle Studio for database management
 - `npm run db:seed` - Seed the database with sample data
 
 ## 🗄️ Database Schema
 
 The application uses the following main entities:
 
-- **Users**: User accounts with email and password
-- **Events**: Event information including location, date, and status
-- **Attendees**: Guest information for events
-- **RSVPs**: Response tracking for event invitations
+- **Users**: User accounts with email and password authentication
+- **Events**: Event information including name, start date, location details (street, zip, building), privacy settings, and status (draft, live, started, ended, canceled)
+- **Attendees**: Guest information with email and name
+- **RSVPs**: Response tracking linking attendees to events with status (going, not-going, maybe)
 
 ## 🔐 Authentication
 
@@ -132,7 +158,10 @@ The application is deployed on Vercel and can be accessed at [pardy-app.vercel.a
 ### Deploy to Vercel
 
 1. Connect your GitHub repository to Vercel
-2. Set up environment variables in Vercel dashboard
+2. Set up environment variables in Vercel dashboard:
+   - `TURSO_CONNECTION_URL`
+   - `TURSO_AUTH_TOKEN`
+   - `JWT_SECRET`
 3. Deploy automatically on push to main branch
 
 ## 🤝 Contributing
