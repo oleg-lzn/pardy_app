@@ -17,7 +17,10 @@ export const getAttendeesCountForDashboard = memoize(
       .groupBy(events.id)
       .execute();
 
-    const total = counts.reduce((acc, count) => acc + count.totalAttendees, 0);
+    const total = counts.reduce(
+      (acc, count) => acc + (count.totalAttendees as number),
+      0
+    );
     return total;
   },
   {

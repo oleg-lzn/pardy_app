@@ -1,18 +1,18 @@
-'use client'
-import { Input } from '@nextui-org/react'
-import { createNewEvent } from '@/actions/events'
-import { Button, Tooltip } from '@nextui-org/react'
-import { CirclePlus } from 'lucide-react'
-import { useTransition } from 'react'
+'use client';
+import { Input } from '@nextui-org/react';
+import { createNewEvent } from '@/actions/events';
+import { Button, Tooltip } from '@nextui-org/react';
+import { CirclePlus } from 'lucide-react';
+import { useTransition } from 'react';
 
 const Nav = () => {
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
     startTransition(() => {
-      createNewEvent()
-    })
-  }
+      createNewEvent();
+    });
+  };
 
   return (
     <nav className="h-[65px] border-b border-default-50 flex items-center px-6 gap-4">
@@ -33,7 +33,7 @@ const Nav = () => {
         <Input size="sm" variant="faded" placeholder="search" />
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;
