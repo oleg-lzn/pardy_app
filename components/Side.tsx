@@ -19,20 +19,20 @@ const Side = () => {
 
   return (
     <div className="w-full h-full px-3 relative">
-      <div className="mb-12">
-        <figure className="w-[80px] pt-4 cursor-pointer">
+      <div className="mb-8 lg:mb-12">
+        <figure className="w-[60px] lg:w-[80px] pt-4 cursor-pointer">
           <Link href="/dashboard">
             <Image src={Logo} alt="pardy" />
           </Link>
         </figure>
       </div>
-      <div>
+      <div className="space-y-1">
         {links.map((link) => (
           <div className="w-full" key={link.route}>
             <Link href={link.route}>
               <div
                 className={cn(
-                  'w-full h-full py-2 px-2 hover:bg-content1 rounded-lg',
+                  'w-full h-full py-3 px-3 hover:bg-content1 rounded-lg text-sm lg:text-base transition-colors',
                   isActive(path, link.route) && activeClass
                 )}
               >
@@ -43,7 +43,13 @@ const Side = () => {
         ))}
       </div>
       <div className="absolute bottom-5 w-full left-0 px-4">
-        <Button onClick={() => signout()} fullWidth variant="ghost">
+        <Button
+          onClick={() => signout()}
+          fullWidth
+          variant="ghost"
+          size="sm"
+          className="text-sm"
+        >
           Sign Out
         </Button>
       </div>
