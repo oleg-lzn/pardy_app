@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Side from './Side';
 import Nav from './Nav';
 import { Button } from '@nextui-org/react';
@@ -8,13 +8,17 @@ import { Menu, X } from 'lucide-react';
 const Shell = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setSidebarOpen(false);
+  }, []);
+
   return (
     <div className="flex w-screen h-screen">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
+          onClick={handleClose}
         />
       )}
 
@@ -29,16 +33,11 @@ const Shell = ({ children }: { children: React.ReactNode }) => {
       `}
       >
         <div className="flex items-center justify-between p-4 lg:hidden">
-          <Button
-            isIconOnly
-            variant="ghost"
-            size="sm"
-            onClick={() => setSidebarOpen(false)}
-          >
+          <Button isIconOnly variant="ghost" size="sm" onClick={handleClose}>
             <X size={16} />
           </Button>
         </div>
-        <Side />
+        <Side onClose={handleClose} />
       </aside>
 
       {/* Main content */}

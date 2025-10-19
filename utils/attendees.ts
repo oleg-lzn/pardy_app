@@ -32,21 +32,45 @@ export const getAttendeesCountForDashboard = memoize(
   }
 );
 
+// export const getGuestList = memoize(
+//   async (userId: string) => {
+//     const uniqueAttendees = await db
+//       .selectDistinct({
+//         id: attendees.id,
+//         name: attendees.name,
+//         email: attendees.email,
+//       })
+//       .from(events)
+//       .leftJoin(rsvps, eq(rsvps.eventId, events.id))
+//       .leftJoin(attendees, eq(attendees.id, rsvps.attendeeId))
+//       .where(eq(events.createdById, userId))
+//       .execute();
+
+//     return uniqueAttendees.filter(
+//       (guest) => guest.id !== undefined && guest.id !== null
+//     );
+//   },
+//   {
+//     persist: true,
+//     revalidateTags: () => ['guests'],
+//     suppressWarnings: true,
+//     log: ['datacache', 'verbose'],
+//     logid: 'guests',
+//   }
+// );
+
 export const getGuestList = memoize(
   async (userId: string) => {
-    const uniqueAttendees = await db
-      .selectDistinct({
+    const allAttendees = await db
+      .select({
         id: attendees.id,
         name: attendees.name,
         email: attendees.email,
       })
-      .from(events)
-      .leftJoin(rsvps, eq(rsvps.eventId, events.id))
-      .leftJoin(attendees, eq(attendees.id, rsvps.attendeeId))
-      .where(eq(events.createdById, userId))
+      .from(attendees)
       .execute();
 
-    return uniqueAttendees.filter(
+    return allAttendees.filter(
       (guest) => guest.id !== undefined && guest.id !== null
     );
   },

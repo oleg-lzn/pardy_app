@@ -13,7 +13,7 @@ const isActive = (path: string, route: string) => {
   return route === '/dashboard' ? path === '/dashboard' : path.includes(route);
 };
 
-const Side = () => {
+const Side = ({ onClose }: { onClose: () => void }) => {
   const path = usePathname();
   const activeClass = 'bg-primary hover:bg-primary';
 
@@ -29,7 +29,7 @@ const Side = () => {
       <div className="space-y-1">
         {links.map((link) => (
           <div className="w-full" key={link.route}>
-            <Link href={link.route}>
+            <Link href={link.route} onClick={onClose}>
               <div
                 className={cn(
                   'w-full h-full py-3 px-3 hover:bg-content1 rounded-lg text-sm lg:text-base transition-colors',
