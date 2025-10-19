@@ -1,14 +1,15 @@
-import { getOneEvent } from '@/utils/events'
-import { getCurrentUser } from '@/utils/users'
-import { redirect } from 'next/navigation'
+import { getOneEvent } from '@/utils/events';
+import { getCurrentUser } from '@/utils/users';
+import { redirect } from 'next/navigation';
+import { EventCard } from '@/components/EventCard';
 
-const EventPage = async ({ params }) => {
-  const user = await getCurrentUser()
-  const event = await getOneEvent(user.id, params.id)
+const EventPage = async ({ params }: { params: { id: string } }) => {
+  const user = await getCurrentUser();
+  const event = await getOneEvent(user.id, params.id);
 
-  if (!event) redirect('/dashboard/events')
+  if (!event) redirect('/dashboard/events');
 
-  return <div>{event.name}</div>
-}
+  return <EventCard event={event} />;
+};
 
-export default EventPage
+export default EventPage;

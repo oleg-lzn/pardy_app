@@ -23,6 +23,5 @@ export const createNewEvent = async () => {
     description: randomName('Cool Event', ' '),
   });
 
-  revalidateTag('events');
   revalidateTag('dashboard:events');
 };

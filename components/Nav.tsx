@@ -1,4 +1,5 @@
 'use client';
+
 import { Input } from '@nextui-org/react';
 import { createNewEvent } from '@/actions/events';
 import { Button, Tooltip } from '@nextui-org/react';
@@ -9,8 +10,8 @@ const Nav = () => {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
-    startTransition(() => {
-      createNewEvent();
+    startTransition(async () => {
+      await createNewEvent();
     });
   };
 
