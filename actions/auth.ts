@@ -53,7 +53,7 @@ export const registerUser = async (prevState: any, formData: FormData) => {
     if (!result) {
       return { message: 'Invalid credentials' };
     }
-    await createSession(result.token);
+    await createSession(result.token as string);
   } catch (e) {
     console.error(e);
     return {
